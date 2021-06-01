@@ -3,11 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "resolutions": {
-    "graceful-fs": "^4.2.4"
-  },
   "scripts": {
-    "preinstall": "npx npm-force-resolutions",
     "start": "node index.js"
   },
   "author": "",
