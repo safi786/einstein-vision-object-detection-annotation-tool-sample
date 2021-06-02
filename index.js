@@ -149,10 +149,10 @@ function createZipFile(csvObj, callback){
 }
 
 function initDirectory(){
-	if (!(fs.existsSync('./public/spool') && fs.statSync('./public/spool').isDirectory())) fs.mkdirSync('./public/spool');
-	if (!(fs.existsSync('./public/data') && fs.statSync('./public/data').isDirectory())) fs.mkdirSync('./public/data');
-	if (!(fs.existsSync('./data') && fs.statSync('./data').isDirectory())) fs.mkdirSync('./data');
-	if (!(fs.existsSync('./data/zip') && fs.statSync('./data/zip').isDirectory())) fs.mkdirSync('./data/zip');
+	if (!(fs.existsSync('tmp/public/spool') && fs.statSync('tmp/public/spool').isDirectory())) fs.mkdirSync('tmp/public/spool');
+	if (!(fs.existsSync('tmp/public/data') && fs.statSync('tmp/public/data').isDirectory())) fs.mkdirSync('tmp/public/data');
+	if (!(fs.existsSync('tmp/data') && fs.statSync('tmp/data').isDirectory())) fs.mkdirSync('tmp/data');
+	if (!(fs.existsSync('tmp/data/zip') && fs.statSync('tmp/data/zip').isDirectory())) fs.mkdirSync('tmp/data/zip');
 	console.log('Init Folders');  
 }
 
