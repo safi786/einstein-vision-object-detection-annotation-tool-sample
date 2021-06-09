@@ -9,6 +9,30 @@ var portNum = (process.env.PORT || 5000);
 var server = app.listen(portNum, function(){
     console.log("Node app is running : " + server.address().port);
 });
+// Imports the Google Cloud client library.
+const {Storage} = require('@google-cloud/storage');
+
+// Instantiates a client. If you don't specify credentials when constructing
+// the client, the client library will look for credentials in the
+// environment.
+const storage = new Storage({keyFilename: 'gc-function-models-ca21fd537c42.json', projectId:'gc-function-models'});
+// Makes an authenticated API request.
+async function listBuckets() {
+  try {
+    const results = await storage.getBuckets();
+
+    const [buckets] = results;
+
+    console.log('Buckets:');
+    buckets.forEach(bucket => {
+      console.log(bucket.name);
+    });
+  } catch (err) {
+    console.error('ERROR:', err);
+  }
+}
+//listBuckets();
+const annotaionsbucketFiles = storage.bucket('annotations-bucket');
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json({limit: '700mb'}));
 app.use(bodyParser.urlencoded({limit: '700mb', extended: true, parameterLimit:50000}));
@@ -146,12 +170,30 @@ function createZipFile(csvObj, callback){
 	}
 	archive.finalize();
 }
+function upload_to_cloud(){
 
+var faker = require('faker');
+const path = require('path');
+const myStorage = new Storage();
+const bucket = myStorage.bucket('annotations-bucket');
+const fileName = 'gc-function-models-ca21fd537c42.json';
+const filePath = path.resolve(__dirname, `${fileName}`);
+const uuid = 'test';
+
+bucket.upload(filePath, {
+  destination: `${uuid}/${fileName}`,
+  gzip: true,
+  metadata: {
+    cacheControl: 'public, max-age=31536000'
+  }
+});
+}
+//save_file('test/gc-function-models-ca21fd537c42.json');
 function initDirectory(){
-	if (!(fs.existsSync('tmp/public/spool') && fs.statSync('tmp/public/spool').isDirectory())) fs.mkdirSync('tmp/public/spool');
-	if (!(fs.existsSync('tmp/public/data') && fs.statSync('tmp/public/data').isDirectory())) fs.mkdirSync('tmp/public/data');
-	if (!(fs.existsSync('tmp/data') && fs.statSync('tmp/data').isDirectory())) fs.mkdirSync('tmp/data');
-	if (!(fs.existsSync('tmp/data/zip') && fs.statSync('tmp/data/zip').isDirectory())) fs.mkdirSync('tmp/data/zip');
+	if (!(fs.existsSync('./public/spool') && fs.statSync('./public/spool').isDirectory())) fs.mkdir('./public/spool');
+	if (!(fs.existsSync('./public/data') && fs.statSync('./public/data').isDirectory())) fs.mkdir('./public/data');
+	if (!(fs.existsSync('./data') && fs.statSync('./data').isDirectory())) fs.mkdirSync('./data');
+	if (!(fs.existsSync('./data/zip') && fs.statSync('./data/zip').isDirectory())) fs.mkdir('./data/zip');
 	console.log('Init Folders');  
 }
 
