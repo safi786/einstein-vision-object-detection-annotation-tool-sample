@@ -3,10 +3,11 @@ npm-debug.log
 *.env
 *.dev
 .DS_Store
-spool
+#spool
 Dockerfile
 docker-compose.yml
-public/spool
-public/data
-data/zip
+#public/spool
+#public/data
+#data/zip
+gc-function-models-ca21fd537c42.json
 package-lock.json
