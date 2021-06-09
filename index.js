@@ -190,10 +190,10 @@ bucket.upload(filePath, {
 }
 //save_file('test/gc-function-models-ca21fd537c42.json');
 function initDirectory(){
-	if (!(fs.existsSync('./public/spool') && fs.statSync('./public/spool').isDirectory())) fs.mkdir('./public/spool');
-	if (!(fs.existsSync('./public/data') && fs.statSync('./public/data').isDirectory())) fs.mkdir('./public/data');
+	if (!(fs.existsSync('./public/spool') && fs.statSync('./public/spool').isDirectory())) fs.mkdirSync('./public/spool');
+	if (!(fs.existsSync('./public/data') && fs.statSync('./public/data').isDirectory())) fs.mkdirSync('./public/data');
 	if (!(fs.existsSync('./data') && fs.statSync('./data').isDirectory())) fs.mkdirSync('./data');
-	if (!(fs.existsSync('./data/zip') && fs.statSync('./data/zip').isDirectory())) fs.mkdir('./data/zip');
+	if (!(fs.existsSync('./data/zip') && fs.statSync('./data/zip').isDirectory())) fs.mkdirSync('./data/zip');
 	console.log('Init Folders');  
 }
 
