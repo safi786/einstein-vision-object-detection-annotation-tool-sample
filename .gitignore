@@ -9,5 +9,5 @@ docker-compose.yml
 #public/spool
 #public/data
 #data/zip
-#gc-function-models-ca21fd537c42.json
+gc-function-models-ca21fd537c42.json
 package-lock.json
