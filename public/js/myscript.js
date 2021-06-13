@@ -3,6 +3,7 @@ var models = [];
 var datasets = [];
 var file;
 var dnd = 0;
+var doms = "<a></a>";
 var zipFile = {};
 var otherLabels = [];
 var doneLabels = [];
@@ -777,6 +778,7 @@ function uploadedImgFiles(dataTransfer){
 			var file = dataTransfer.files[i];
 			var fileName = file.name;
 			var reader = new FileReader();
+
 			reader.onload = (function(theFile, theFileName) {
 				return function(e) {
 					console.log('File type: ' + theFile.type);
@@ -853,18 +855,20 @@ function odNewsSelectImg(dat){
 
 
 function addImgElement(dat){
-	var thisUrl = location.origin + '/spool/' + dat;
-	var dom = 
+    console.log("creating", dat, Date.now());
+	var thisUrl = 'https://storage.googleapis.com/test-annotations-bucket' + '/public/' + dat;
+	var dom =
 	'<a href="#" class="thumbnail od-new-img-select" data-file="' + dat + '" data-url="' + thisUrl + '">' +
 	'<img id="od-new-img-e-' + dat + '" src="' + thisUrl + '"/>' +
 	'<div class="caption"><h4>' + dat + '</h4></div>' +
 	'</a>';
+
 	if (imgList.indexOf(dat) == -1){
-		imgList.push(dat);			
+		imgList.push(dat);
 		$('#od-new-img-t-list').append(dom);
+//        window.doms = 78;
 		annotations[dat] = [];
 	}
-
 }
 
 
